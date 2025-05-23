@@ -46,3 +46,21 @@ mysql> create procedure proc_emp()
    end $$
 
 delimiter ;
+
+
+
+4
+DELIMITER $$
+CREATE TRIGGER salarydiff
+AFTER UPDATE on customer
+FOR EACH ROW
+BEGIN
+DECLARE old_sal INT;
+DECLARE new_sal INT;
+DECLARE sal_diff INT;
+SET old_sal=OLD.salary;
+SET new_sal=NEW.salary;
+SET sal_diff=new_sal-old_sal;
+INSERT INTO salary_changes(c_id, saldiff) 
+VALUES(OLD.c_id, sal_diff) ;
+END $$
