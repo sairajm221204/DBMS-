@@ -1,5 +1,6 @@
 # DBMS-
  6th
+ delimiter $$
  create procedure n1(IN rno1 int)
     begin
     declare rno2 int;
